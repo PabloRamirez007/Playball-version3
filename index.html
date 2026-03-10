@@ -706,193 +706,11 @@ main{padding:20px 24px 60px;position:relative;z-index:1}
 ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.06);border-radius:3px}
 
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-
-/* ═══════════════════════════════════════════
-   IMÁGENES DE FONDO DECORATIVAS
-   pointer-events:none — no interfieren con nada
-═══════════════════════════════════════════ */
-
-/* ── Fondo global: imagen difuminada de estadio ── */
-#bgScene{
-  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
-}
-#bgScene img{
-  width:100%;height:100%;object-fit:cover;
-  opacity:.045;
-  filter:blur(2px) saturate(0.4) brightness(0.5);
-}
-
-/* ── Imágenes flotantes laterales (decoración) ── */
-.bg-float{
-  position:fixed;z-index:0;pointer-events:none;
-  opacity:0;
-  transition:opacity 1.2s ease;
-}
-.bg-float.loaded{opacity:1}
-.bg-float img{
-  display:block;
-  border-radius:12px;
-  object-fit:cover;
-  filter:brightness(.45) saturate(1.1);
-  mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.7) 30%,rgba(0,0,0,.7) 70%,transparent 100%);
-  -webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.7) 30%,rgba(0,0,0,.7) 70%,transparent 100%);
-}
-
-/* Imagen izquierda — aparece a la izquierda del contenido */
-#bgLeft{
-  left:-60px;top:160px;width:320px;height:480px;
-  transform:rotate(-3deg);
-}
-#bgLeft img{width:100%;height:100%}
-
-/* Imagen derecha — aparece a la derecha del contenido */
-#bgRight{
-  right:-60px;top:200px;width:300px;height:460px;
-  transform:rotate(3deg);
-}
-#bgRight img{width:100%;height:100%}
-
-/* Solo visibles en pantallas >= 1400px */
-@media(max-width:1400px){#bgLeft,#bgRight{display:none}}
-
-/* ── Imagen header: tira sutil detrás del nav ── */
-.sportnav{
-  position:relative;
-  overflow:hidden;
-}
-.sportnav::before{
-  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1400&q=60&auto=format&fit=crop');
-  background-size:cover;background-position:center 30%;
-  opacity:.06;
-  filter:saturate(.5);
-}
-.sportnav .stab{position:relative;z-index:1}
-
-/* ── Sección En Vivo: fondo sutil de cancha ── */
-#sec-live{
-  position:relative;overflow:hidden;
-  border-radius:10px;
-}
-#sec-live::before{
-  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1400&q=55&auto=format&fit=crop');
-  background-size:cover;background-position:center 40%;
-  opacity:.04;
-  filter:saturate(.4) blur(1px);
-}
-#sec-live .sec-hdr,
-#sec-live .acc-body{position:relative;z-index:1}
-
-/* ── Sección Finalizados: fondo sutil de baloncesto ── */
-#sec-final{
-  position:relative;overflow:hidden;
-  border-radius:10px;
-}
-#sec-final::before{
-  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:url('https://images.unsplash.com/photo-1546519638-68e109498ffc?w=1400&q=55&auto=format&fit=crop');
-  background-size:cover;background-position:center 30%;
-  opacity:.04;
-  filter:saturate(.4) blur(1px);
-}
-#sec-final .sec-hdr,
-#sec-final .acc-body{position:relative;z-index:1}
-
-/* ── Sección Próximos: fondo béisbol ── */
-#sec-upcoming{
-  position:relative;overflow:hidden;
-  border-radius:10px;
-}
-#sec-upcoming::before{
-  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=1400&q=55&auto=format&fit=crop');
-  background-size:cover;background-position:center 40%;
-  opacity:.04;
-  filter:saturate(.4) blur(1px);
-}
-#sec-upcoming .sec-hdr,
-#sec-upcoming .acc-body{position:relative;z-index:1}
-
-/* ═══════════════════════════════════════════
-   JERSEY STRIP — Sub-sección fútbol en "Todos"
-═══════════════════════════════════════════ */
-.jersey-strip{
-  display:flex;gap:10px;
-  overflow-x:auto;
-  padding:14px 4px 18px;
-  scrollbar-width:none;
-}
-.jersey-strip::-webkit-scrollbar{display:none}
-
-.jkit{
-  flex:0 0 auto;
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(200,255,0,.08);
-  border-radius:10px;
-  padding:12px 14px 10px;
-  width:110px;
-  transition:transform .22s,border-color .22s,background .22s;
-  cursor:default;
-}
-.jkit:hover{
-  transform:translateY(-5px);
-  background:rgba(200,255,0,.05);
-  border-color:rgba(200,255,0,.22);
-}
-.jkit-img{
-  width:64px;height:64px;object-fit:contain;
-  filter:drop-shadow(0 4px 14px rgba(0,0,0,.8));
-  transition:transform .3s;
-}
-.jkit:hover .jkit-img{transform:scale(1.1) rotate(-2deg)}
-.jkit-team{
-  font-family:'Bebas Neue',sans-serif;font-size:.82rem;letter-spacing:2px;
-  color:var(--t1);text-align:center;line-height:1.1;
-}
-.jkit-player{
-  font-family:'JetBrains Mono',monospace;font-size:.48rem;
-  color:var(--football-col);letter-spacing:.5px;text-align:center;
-}
-.jkit-league{
-  font-family:'JetBrains Mono',monospace;font-size:.44rem;
-  color:var(--t3);letter-spacing:1px;
-}
-
-.jersey-strip-title{
-  font-family:'JetBrains Mono',monospace;font-size:.5rem;
-  color:var(--t3);letter-spacing:3px;
-  padding:8px 4px 0;
-  display:flex;align-items:center;gap:8px;
-}
-.jersey-strip-title::after{
-  content:'';flex:1;height:1px;
-  background:linear-gradient(to right,rgba(200,255,0,.1),transparent);
-}
 </style>
 </head>
 <body>
 
 <div id="ballOverlay"><div class="ball-anim" id="ballAnim"></div></div>
-
-<!-- ═══ FONDO DECORATIVO — pointer-events:none, no interfiere ═══ -->
-<div id="bgScene">
-  <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1920&q=50&auto=format&fit=crop" 
-       alt="" loading="lazy">
-</div>
-
-<!-- Imagen lateral izquierda: jugador de fútbol difuminado -->
-<div class="bg-float" id="bgLeft">
-  <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400&q=70&auto=format&fit=crop"
-       alt="" loading="lazy" onload="this.closest('.bg-float').classList.add('loaded')">
-</div>
-
-<!-- Imagen lateral derecha: baloncesto difuminado -->
-<div class="bg-float" id="bgRight">
-  <img src="https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=400&q=70&auto=format&fit=crop"
-       alt="" loading="lazy" onload="this.closest('.bg-float').classList.add('loaded')">
-</div>
 
 <div id="pageWrap">
 <header>
@@ -1916,9 +1734,6 @@ function renderGridWithSports(matches, containerId, statusKey){
     // Para finalizados: mostrar fecha en cada card
     const isFinal = statusKey === 'final';
 
-    // ── Jersey strip solo en sub-sección de fútbol (pestaña TODOS) ──
-    const jerseyStrip = (sd.key === 'football' && curSport === 'all') ? footballJerseyStrip() : '';
-
     html += `<div class="sport-section">
       <div class="sport-sec-hdr ${sd.cls}-hdr ${openCls}" id="shdr-${subId}" onclick="toggleSubSection('${subId}')">
         <span style="font-size:1rem">${sd.icon}</span>
@@ -1927,7 +1742,6 @@ function renderGridWithSports(matches, containerId, statusKey){
         <span class="sport-acc-arrow">▶</span>
       </div>
       <div class="sport-acc-body" id="sbody-${subId}">
-        ${jerseyStrip}
         <div class="grid">
           ${sportMatches.map((m,i)=>cardHTML(m,i,isFinal)).join('')}
         </div>
@@ -1969,61 +1783,6 @@ function toggleSubSection(subId){
     body.style.opacity='0';
     body.style.paddingTop='0';
   }
-}
-
-// ══════════════════════════════════════════════════════════
-//  FOOTBALL JERSEY STRIP — aparece en sub-sección fútbol (Todos)
-// ══════════════════════════════════════════════════════════
-function footballJerseyStrip(){
-  const kits = [
-    {
-      img:'https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/120px-Real_Madrid_CF.svg.png',
-      team:'REAL MADRID', player:'#9 MBAPPÉ', league:'LA LIGA'
-    },
-    {
-      img:'https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/120px-FC_Barcelona_%28crest%29.svg.png',
-      team:'BARCELONA', player:'#19 YAMAL', league:'LA LIGA'
-    },
-    {
-      img:'https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/120px-Manchester_City_FC_badge.svg.png',
-      team:'MAN CITY', player:'#47 FODEN', league:'PREMIER'
-    },
-    {
-      img:'https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/120px-Liverpool_FC.svg.png',
-      team:'LIVERPOOL', player:'#11 SALAH', league:'PREMIER'
-    },
-    {
-      img:'https://upload.wikimedia.org/wikipedia/de/thumb/1/1c/Paris_Saint-Germain_Logo.svg/120px-Paris_Saint-Germain_Logo.svg.png',
-      team:'PSG', player:'#10 DEMBÉLÉ', league:'LIGUE 1'
-    },
-    {
-      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Atletico_Madrid_logo.svg/120px-Atletico_Madrid_logo.svg.png',
-      team:'ATLÉTICO', player:'#7 GRIEZMANN', league:'LA LIGA'
-    },
-    {
-      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/120px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png',
-      team:'BAYERN', player:'#25 MÜLLER', league:'BUNDESLIGA'
-    },
-    {
-      img:'https://upload.wikimedia.org/wikipedia/en/thumb/7/77/Borussia_Dortmund_logo.svg/120px-Borussia_Dortmund_logo.svg.png',
-      team:'DORTMUND', player:'#17 ADEYEMI', league:'BUNDESLIGA'
-    },
-  ];
-
-  const kitsHTML = kits.map(k=>`
-    <div class="jkit">
-      <img class="jkit-img"
-           src="${k.img}"
-           alt="${k.team}"
-           onerror="this.style.opacity='.3'">
-      <div class="jkit-team">${k.team}</div>
-      <div class="jkit-player">${k.player}</div>
-      <div class="jkit-league">${k.league}</div>
-    </div>`).join('');
-
-  return `
-    <div class="jersey-strip-title">⚽ UNIFORMES ICÓNICOS</div>
-    <div class="jersey-strip">${kitsHTML}</div>`;
 }
 
 function renderGrid(ms,id){
